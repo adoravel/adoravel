@@ -1,6 +1,6 @@
 import { withInterval } from "../utils/temp.ts";
 
-const FM_API_KEY = Deno.env.get("LASTFM_API_KEY") ?? "790c37d90400163a5a5fe00d6ca32ef0";
+const FM_API_KEY = Deno.env.get("LASTFM_API_KEY");
 
 export interface Parameters {
 	api_key: string;

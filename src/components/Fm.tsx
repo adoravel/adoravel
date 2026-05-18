@@ -9,7 +9,7 @@ import { FM_USER, tracks } from "../mech/fm.ts";
 
 const fm = css(`
 	:scope {
-		margin-top: 0.5rem;
+		margin-top: 0.5rem !important;
 	}
 
 	.fm-more:hover {

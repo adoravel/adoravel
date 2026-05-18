@@ -68,7 +68,7 @@ const style = css(`
 		letter-spacing: ${spacing.letter.tight};
 		width: fit-content;
 		
-		background: repeating-linear-gradient(-90deg, ${repeat(theme.text, 48)}, ${palette}, ${repeat(theme.text, 48)});
+		background: repeating-linear-gradient(-90deg, ${repeat(theme.text, 32)}, ${palette}, ${repeat(theme.text, 32)});
 		background-size: 1000% 100%;
 		-webkit-background-clip: text;
 		background-clip: text;
