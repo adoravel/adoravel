@@ -3,19 +3,22 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css, Import } from "~/mech/css.ts";
+import { css } from "~/lib/css.ts";
 import { boundaries, fontSize, Layout, spacing, theme } from "~/layout.tsx";
-// import { NavigationBar } from "~/components/NavigationBar.tsx";
-import Heading from "~/components/Heading.tsx";
-import SectionTitle from "~/components/SectionTitle.tsx";
-import Projects from "~/components/Projects.tsx";
-import { MediaItem } from "~/components/MediaItem.tsx";
-import { Fm } from "~/components/Fm.tsx";
-import KVTable from "~/components/KVTable.tsx";
-import { Footer } from "~/components/Footer.tsx";
-import { friends, projects, songs } from "~/constants.ts";
+import Hero from "~/components/home/Heading.tsx";
+import Heading from "~/components/ui/Heading.tsx";
+import Projects from "~/components/content/Projects.tsx";
+import FeaturedSong from "~/components/content/FeaturedSong.tsx";
+import RecentTracks from "~/components/content/RecentTracks.tsx";
+import PropertyTable from "~/components/ui/PropertyTable.tsx";
+import Footer from "~/components/layout/Footer.tsx";
+import { songs } from "~/content/songs.ts";
+import { projects } from "~/content/projects.ts";
+import { lastfm, tracks } from "~/services/lastfm.ts";
+import { friends } from "~/content/friends.ts";
+import CollapsibleParagraph from "~/components/ui/CollapsibleParagraph.tsx";
 
-const home = css(`
+const Styled = css(`
 	#heading {
 		margin-bottom: ${spacing.section};
 		position: relative;
@@ -162,31 +165,24 @@ const home = css(`
 
 export default () => {
 	return (
-		<Layout class={home.scope}>
+		<Layout scope={Styled}>
 			<head>
 				<title>hewo!!</title>
-				<Import styles={[home]} />
 				<link rel="stylesheet" href="/fonts/space-grotesk/import.css" />
 			</head>
-			{/* <NavigationBar items={[["home", "/"], ["reports", "/reports"]]} selected="home" /> */}
 			<header id="heading">
-				<Heading />
+				<Hero />
 			</header>
 			<section id="intro">
-				<SectionTitle>Introduction</SectionTitle>
-				<div id="intro-text-container">
-					<p>
+				<Heading>Introduction</Heading>
+				<div>
+					<p style={{ display: "inline" }}>
 						I'm an aspiring computer engineer passionate about open access and well-crafted software. I really love
 						linguistics, functional programming, the C programming language, and unconventional TypeScript.
 					</p>
-					<input type="checkbox" id="intro-toggle" class="read-more-checkbox" autocomplete="off" />
-					<label for="intro-toggle" class="read-more-btn link read-more-label-expand">Read more</label>
-					<label for="intro-toggle" class="read-more-btn link read-more-label-collapse">Show less</label>
-					<div id="read-more-content">
+					<CollapsibleParagraph id="intro-text-container">
 						<p>
-							<i>In a more personal tone~</i>
-						</p>
-						<p>
+							<i>In a more personal tone~</i>{" "}
 							I'm especially interested in atypical low-level systems and the intersection of hardware and software
 							interface, with a particular fascination for the x86 and RISC-V ISAs, and I love finding elegant solutions
 							in places most people don't bother to look at.
@@ -202,45 +198,47 @@ export default () => {
 							<a href="/~snarl">snarl</a>, my own web framework, built on the principle that the best way to understand
 							something is to build it yourself and have fun doing it. Go check it out!!!111!
 						</p>
-					</div>
+					</CollapsibleParagraph>
 				</div>
 			</section>
 			<section id="song">
-				<SectionTitle>Current favourite songs</SectionTitle>
+				<Heading>Current favourite songs</Heading>
 				<ul class="media">
 					{songs.map((song) => (
 						<li>
-							<MediaItem {...song} />
+							<FeaturedSong {...song} />
 						</li>
 					))}
 				</ul>
 			</section>
 			<section id="projects">
-				<SectionTitle>Projects</SectionTitle>
+				<Heading>Projects</Heading>
 				<Projects
 					projects={projects}
 				/>
 			</section>
 			<section id="fm">
-				<SectionTitle>Recently listened</SectionTitle>
-				<Fm />
+				<Heading>Recently listened</Heading>
+				<RecentTracks tracks={tracks() ?? []} cutoff={4} profileUrl={`https://last.fm/user/${lastfm.user}`} />
 			</section>
 			<section id="friends">
-				<SectionTitle>{"Friends &lt;3"}</SectionTitle>
+				<Heading>{"Friends &lt;3"}</Heading>
 				<p>Precious friendships; from the bottom of my heart, I am genuinely grateful for their existence~</p>
 				<div class="buttons">
 					<iframe width="88" height="31" style="border:none" src="/button.min.html"></iframe>
-					<a href={friends[0].href} rel="noopener nofollow">
-						<img src={friends[0].src} alt={friends[0].alt} width="88" height="31" />
+					<a href={friends["88x31"][0].href} rel="noopener nofollow">
+						<img src={friends["88x31"][0].src} alt={friends["88x31"][0].alt} width="88" height="31" />
 					</a>
-					<iframe
-						width="88"
-						height="31"
-						style="border:none"
-						sandbox="allow-scripts allow-popups"
-						srcdoc="<!doctype html><body onload=&#34;d=d.style,d.position=`absolute`,x=0,y=Math.random()*66|0,u=v=1,c=3;setInterval`x+=u${166}y+=v,z=x<=0||x>=20,w=y<=0||y>=67;z&&w?c=(c+3)%6-1:0,u^=-z-z,v^=-w-w;d.background='hwb('+60*c+' 0 0)';d.top=x+'px',d.left=y+'px'`&#34;bgcolor=#000><a href=https://github.com/rniii target=_blank><img id=d src=data:image/gif;base64,R0lGODdhFQALAHcAACH5BAkKAAAALAAAAAAVAAsAgAAAAAAAAAInDI4Xa6m8EkNQPQtivnvuH3mc1pSlU3EUxJrtC8eig851Q2daTjMFADs>"
-					/>
-					{friends.slice(1).map(({ href, src, alt }) => (
+					{friends.iframe.map((script) => (
+						<iframe
+							width="88"
+							height="31"
+							style="border:none"
+							sandbox="allow-scripts allow-popups"
+							srcdoc={script}
+						/>
+					))}
+					{friends["88x31"].slice(1).map(({ href, src, alt }) => (
 						<a href={href} rel="noopener nofollow">
 							<img src={src} alt={alt} width="88" height="31" onerror="this.parentElement.remove()" />
 						</a>
@@ -248,12 +246,12 @@ export default () => {
 				</div>
 			</section>
 			<section id="donate">
-				<SectionTitle>Piggy bank</SectionTitle>
+				<Heading>Piggy bank</Heading>
 				<p>
 					If you enjoy throwing money at people on the internet, please consider me to help keep my projects alive and
 					help me navigate some rough financial patches and stay afloat while things are tight (like rn)
 				</p>
-				<KVTable
+				<PropertyTable
 					data={{
 						"GitHub Sponsors": ["adoravel", "https://github.com/sponsors/adoravel"],
 						"Ko-Fi": ["west", "https://ko-fi.com/west"],

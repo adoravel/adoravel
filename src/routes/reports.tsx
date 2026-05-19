@@ -3,17 +3,16 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css, Import } from "~/mech/css.ts";
+import { css } from "~/lib/css.ts";
 import { Layout } from "~/layout.tsx";
 
-const reports = css(`
+const Styled = css(`
 	.sorry {}
 `);
 
 export default () => {
 	return (
-		<Layout class={reports.scope}>
-			<Import styles={[reports]} />
+		<Layout scope={Styled}>
 			<span>wip, sorry</span>
 		</Layout>
 	);

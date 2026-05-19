@@ -4,6 +4,13 @@
  */
 
 import { jsx, JsxElement, JsxNode } from "@july/snarl/jsx-runtime";
+import { ScopedStyling } from "~/lib/css.ts";
+
+export interface LayoutProps {
+	children?: any;
+	scope: ScopedStyling;
+	class?: string;
+}
 
 export const rem = (val: number | string) => `${val}rem`;
 export const em = (val: number | string) => `${val}em`;
@@ -59,6 +66,7 @@ export const tokens = createTheme({
 	spacing: {
 		letter: {
 			tight: em(-.05),
+			misc: em(-.025),
 			plus: em(.03),
 		},
 		"1": rem(.25),
@@ -112,12 +120,15 @@ export const tokens = createTheme({
 	},
 	misc: {
 		arrow: url(
-			"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDgiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+CiAgPHJlY3QgeD0iMiIgeT0iMCIgd2lkdGg9IjYiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KICA8cmVjdCB4PSI0IiB5PSIyIiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjIiIHk9IjQiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iNiIgeT0iNCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KICA8cmVjdCB4PSIwIiB5PSI2IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+			`data:image/svg+xml;base64,${btoa(Deno.readTextFileSync("./assets/ui/arrow.svg"))}`,
 		),
 	},
 	fontFamily: {
-		default: '"Iosevka Custom Web", "Iosevka Custom", Iosevka, monospace, sans-serif',
-		heading: "'Space Grotesk', sans-serif",
+		default:
+			'"Bricolage Grotesque", "Iosevka Custom Web", "Iosevka Custom", Iosevka, "Space Grotesk", sans-serif, monospace',
+		misc:
+			'"Iosevka Custom Web", "Iosevka Custom", Iosevka, "Bricolage Grotesque", "Space Grotesk", sans-serif, monospace',
+		heading: "'Space Grotesk', sans-serif, monospace",
 	},
 });
 
@@ -135,6 +146,7 @@ const styles = /* css */ `
 	html {
     	overflow-x: clip;
 		font-family: ${tokens.fontFamily.default};
+		font-weight: 400;
 		line-height: ${tokens.boundaries.lineHeight};
 		font-size: ${tokens.fontSize.root};
 		text-rendering: optimizeLegibility;
@@ -161,7 +173,7 @@ const styles = /* css */ `
 	    text-decoration: none;
 	}
 
-	section p {
+	section p, section i {
 		margin-bottom: ${tokens.spacing[4]};
 		font-size: ${tokens.fontSize.body};
 		color: ${tokens.theme.subtext};
@@ -187,7 +199,8 @@ const styles = /* css */ `
 		display: inline-block;
 		width: 8px;
 		height: 8px;
-		margin-left: 8px;
+		margin-left: 4px;
+		margin-right: 4px;
 		background-color: ${tokens.theme.accent};
 		mask: no-repeat center / contain ${tokens.misc.arrow};
 	}
@@ -205,11 +218,6 @@ const styles = /* css */ `
 		color: ${tokens.theme.background};
 	}
 `;
-
-export interface LayoutProps {
-	children?: JsxElement | JsxElement[];
-	class?: string;
-}
 
 interface CollectResult {
 	head: JsxNode[];
@@ -251,7 +259,7 @@ function collect(node: JsxNode, result: CollectResult): void {
 	result.body.push(jsx(tag, { ...props, children: child.body as any }));
 }
 
-export function Layout({ children, class: className }: LayoutProps = {}) {
+export function Layout({ scope, children, class: className }: LayoutProps) {
 	const result: CollectResult = { head: [], body: [] };
 	collect(children, result);
 
@@ -269,12 +277,13 @@ export function Layout({ children, class: className }: LayoutProps = {}) {
 				<meta property="og:title" content="júlia lívia" />
 				<meta name="theme-color" content={tokens.theme.accentDim} />
 				<link rel="stylesheet" href="/fonts/iosevka-custom/import.css" />
+				<link rel="stylesheet" href="/fonts/bricolage-grotesque/import.css" />
 				<style>{styles}</style>
 				{result.head}
 			</head>
-			<body class={className}>
+			<scope.body class={className}>
 				{result.body}
-			</body>
+			</scope.body>
 		</html>
 	);
 }

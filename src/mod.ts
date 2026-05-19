@@ -4,17 +4,22 @@
  */
 
 import { createRouter } from "@july/snarl";
-import { cssMiddleware as scopedStyles, styleInjectionMiddleware } from "~/mech/css.ts";
-import { scanRoutes as scan } from "./mech/routing.ts";
-import minify from "./mech/mini.ts";
-import { contextMiddleware } from "./global.ts";
 import { staticFiles } from "@july/snarl";
 
+import { cssMiddleware as scopedStyles, styleInjectionMiddleware } from "~/middleware/scoped-css.ts";
+import { scanRoutes as scan } from "~/middleware/routing.ts";
+import minify from "~/middleware/minification.ts";
+import { contextMiddleware } from "~/lib/context.ts";
+
 const router = createRouter();
-router.use(minify(), styleInjectionMiddleware(), contextMiddleware(), scopedStyles());
-router.use(staticFiles("./static", {
-	maxAge: 259200,
-}));
+router.use(
+	contextMiddleware(),
+	scopedStyles(),
+	staticFiles("./static", { maxAge: 259200 }),
+	staticFiles("./assets", { maxAge: 259200 }),
+	minify(),
+	styleInjectionMiddleware(),
+);
 
 scan(router);
 

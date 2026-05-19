@@ -4,7 +4,7 @@
 	font-weight: 400;
 	font-stretch: normal;
 	font-style: normal;
-	src: url("TTF/IosevkaCustom-Regular.ttf") format("truetype");
+	src: url("ttf/IosevkaCustom-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -13,7 +13,7 @@
 	font-weight: 400;
 	font-stretch: normal;
 	font-style: italic;
-	src: url("TTF/IosevkaCustom-Italic.ttf") format("truetype");
+	src: url("ttf/IosevkaCustom-Italic.ttf") format("truetype");
 }
 
 @font-face {
@@ -22,7 +22,7 @@
 	font-weight: 700;
 	font-stretch: normal;
 	font-style: normal;
-	src: url("TTF/IosevkaCustom-Bold.ttf") format("truetype");
+	src: url("ttf/IosevkaCustom-Bold.ttf") format("truetype");
 }
 
 @font-face {
@@ -31,5 +31,5 @@
 	font-weight: 700;
 	font-stretch: normal;
 	font-style: italic;
-	src: url("TTF/IosevkaCustom-BoldItalic.ttf") format("truetype");
+	src: url("ttf/IosevkaCustom-BoldItalic.ttf") format("truetype");
 }
