@@ -42,16 +42,29 @@ const Styled = css(`
 		line-height: ${boundaries.lineHeight + 0.25};
 		text-decoration: none;
 		overflow: hidden;
+		
+		transform: translateY(0px);
+		box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+		transition:
+			transform ${ease.spring},
+			box-shadow ${ease.spring},
+			background-color ${ease.fast},
+			border-color ${ease.fast};
+
+		&:hover {			
+			background-color: ${theme.surfaceHover};
+			border-color: ${theme.surfaceBorderHover};
+
+			transform: translateY(-4px);
+			box-shadow:
+				0 12px 32px rgba(0, 0, 0, 0.45),
+				0 2px 8px rgba(0, 0, 0, 0.2);
+		}
 	}
 
-	.project-card:hover {
-		background-color: ${theme.surfaceHover};
-		border-color: ${theme.surfaceBorderHover};
-		
-		&::before {
-			transform: scale(1.125);
-			opacity: 1;
-		}
+	.project-card:hover::before {
+		transform: scale(1.125);
+		opacity: 1;
 	}
 
 	.project-card::before {

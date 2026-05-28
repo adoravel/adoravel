@@ -4,7 +4,7 @@
  */
 
 import { css } from "~/lib/css.ts";
-import { spacing, theme } from "~/layout.tsx";
+import { ease, spacing, theme } from "~/layout.tsx";
 import { friends } from "~/content/friends.ts";
 
 const Styled = css(`
@@ -36,6 +36,17 @@ const Styled = css(`
 			2px 2px,
 			0px 2px
 		);
+
+		transform: translateY(0px);
+		transition:
+			transform ${ease.spring},
+			box-shadow ${ease.spring};
+
+		&:hover {			
+			transform: translateY(-4px);
+			box-shadow:
+				0 12px 32px rgba(0, 0, 0, 0.45),
+				0 2px 8px rgba(0, 0, 0, 0.2);
 	}
 `);
 

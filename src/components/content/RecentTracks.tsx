@@ -35,6 +35,20 @@ const Styled = css(`
 		text-align: center;
 		gap: ${spacing[3]};
 		max-width: ${boundaries.avatarSize};
+
+		transform: translateY(0px);
+		transition:
+			transform ${ease.spring},
+			filter ${ease.spring};
+
+		&:hover {			
+			opacity: 1;
+
+			transform: translateY(-4px);
+			filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.45)) 
+							drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+		}
+
 	}
 
 	.cover {
@@ -91,15 +105,10 @@ const Styled = css(`
 		color: ${theme.text};
 		padding: ${spacing[3]};
 		z-index: ${elevation.base};
-		transition: opacity ${ease.fast};
 
 		@media (max-width: 930px) {
 			display: none;
 		}
-	}
-
-	.fm-more:hover {
-		opacity: 1;
 	}
 
 	.fm-more::before {

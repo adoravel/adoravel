@@ -17,6 +17,7 @@ import { projects } from "~/content/projects.ts";
 import { lastfm, tracks } from "~/services/lastfm.ts";
 import { friends } from "~/content/friends.ts";
 import CollapsibleParagraph from "~/components/ui/CollapsibleParagraph.tsx";
+import ButtonWall from "~/components/home/ButtonWall.tsx";
 
 const Styled = css(`
 	#heading {
@@ -122,45 +123,14 @@ const Styled = css(`
 		}
 	}
 
-    .read-more-btn {
+  .read-more-btn {
 		margin-left: 1ch;
-        cursor: pointer;
-        text-decoration: none;
-        user-select: none;
-        font-size: ${fontSize.body};
-        color: ${theme.accent};
-    }
-
-	.buttons {
-		display: flex;
-		flex-wrap: wrap;
-		gap: ${spacing[1]};
-	}
-
-	.buttons a,
-	iframe {
-		display: inline-block;
-		text-align: center;
-		width: 88px;
-		height: 31px;
-		image-rendering: pixelated;
-		background-color: ${theme.lift};
-		color: ${theme.text};
-		clip-path: polygon(
-			0px calc(100% - 2px),
-			2px calc(100% - 2px),
-			2px 100%,
-			calc(100% - 2px) 100%,
-			calc(100% - 2px) calc(100% - 2px),
-			100% calc(100% - 2px),
-			100% 2px,
-			calc(100% - 2px) 2px,
-			calc(100% - 2px) 0px,
-			2px 0px,
-			2px 2px,
-			0px 2px
-  		);
-	}
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    font-size: ${fontSize.body};
+    color: ${theme.accent};
+  }
 `);
 
 export default () => {
@@ -224,26 +194,7 @@ export default () => {
 			<section id="friends">
 				<Heading>{"Friends &lt;3"}</Heading>
 				<p>Precious friendships; from the bottom of my heart, I am genuinely grateful for their existence~</p>
-				<div class="buttons">
-					<iframe width="88" height="31" style="border:none" src="/button.min.html"></iframe>
-					<a href={friends["88x31"][0].href} rel="noopener nofollow">
-						<img src={friends["88x31"][0].src} alt={friends["88x31"][0].alt} width="88" height="31" />
-					</a>
-					{friends.iframe.map((script) => (
-						<iframe
-							width="88"
-							height="31"
-							style="border:none"
-							sandbox="allow-scripts allow-popups"
-							srcdoc={script}
-						/>
-					))}
-					{friends["88x31"].slice(1).map(({ href, src, alt }) => (
-						<a href={href} rel="noopener nofollow">
-							<img src={src} alt={alt} width="88" height="31" onerror="this.parentElement.remove()" />
-						</a>
-					))}
-				</div>
+				<ButtonWall buttons={friends} />
 			</section>
 			<section id="donate">
 				<Heading>Piggy bank</Heading>

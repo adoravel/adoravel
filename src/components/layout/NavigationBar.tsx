@@ -4,7 +4,7 @@
  */
 
 import { css } from "~/lib/css.ts";
-import { fontSize, spacing, theme } from "~/layout.tsx";
+import { ease, fontSize, spacing, theme } from "~/layout.tsx";
 
 interface Props<T extends readonly [string, string][]> {
 	items: T;
@@ -42,16 +42,29 @@ const Styled = css(`
 		text-decoration: none;
 		border-radius: 1000px;
 		transition: color 0.15s ease, background-color 0.15s ease;
+
+		transform: translateY(0px);
+		transition:
+			color ${ease.fast},
+			background-color ${ease.fast},
+			transform ${ease.spring};
 	}
 
 	.item:hover {
 		color: ${theme.text};
+		transform: translateY(-2px);
 	}
 
 	.selected > .item {
 		color: ${theme.background};
 		background-color: ${theme.accent};
 		font-weight: 600;
+		box-shadow: 0 4px 14px rgba(166, 181, 247, 0.25);
+	}
+
+	.selected > .item:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 18px rgba(166, 181, 247, 0.35);
 	}
 `);
 

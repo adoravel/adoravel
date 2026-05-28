@@ -6,19 +6,19 @@
 import { createRouter } from "@july/snarl";
 import { staticFiles } from "@july/snarl";
 
-import { cssMiddleware as scopedStyles, styleInjectionMiddleware } from "~/middleware/scoped-css.ts";
-import { scanRoutes as scan } from "~/middleware/routing.ts";
+import { scopedStyling, styleScopeInjection } from "~/middleware/scoped-css.ts";
+import { scanRoutes as scan } from "~/lib/routing.ts";
 import minify from "~/middleware/minification.ts";
-import { contextMiddleware } from "~/lib/context.ts";
+import { contextMiddleware as context } from "~/lib/context.ts";
 
 const router = createRouter();
 router.use(
-	contextMiddleware(),
-	scopedStyles(),
+	context(),
+	scopedStyling(),
 	staticFiles("./static", { maxAge: 259200 }),
 	staticFiles("./assets", { maxAge: 259200 }),
 	minify(),
-	styleInjectionMiddleware(),
+	styleScopeInjection(),
 );
 
 scan(router);

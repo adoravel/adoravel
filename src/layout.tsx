@@ -53,6 +53,7 @@ export const tokens = createTheme({
 		text: "#e7e0e7",
 		subtext: "#c3c7d1",
 		textMuted: "#968e9a",
+		textMutedHover: "#e1d5e7",
 		accent: "#a6b5f7",
 		accentDim: "#7c8fdb",
 		accentBackground: "#2d3d7f",
@@ -199,8 +200,8 @@ const styles = /* css */ `
 		display: inline-block;
 		width: 8px;
 		height: 8px;
-		margin-left: 4px;
-		margin-right: 4px;
+		margin-left: 5px;
+		margin-right: 5px;
 		background-color: ${tokens.theme.accent};
 		mask: no-repeat center / contain ${tokens.misc.arrow};
 	}

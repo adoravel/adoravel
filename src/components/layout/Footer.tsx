@@ -5,7 +5,7 @@
 
 import { css } from "~/lib/css.ts";
 import { Fluxer, GitHub, Mail, Tangled } from "~/components/ui/Icon.tsx";
-import { fontSize, spacing, theme } from "~/layout.tsx";
+import { ease, fontSize, spacing, theme } from "~/layout.tsx";
 
 const Styled = css(`
 	:scope {
@@ -52,10 +52,18 @@ const Styled = css(`
 		outline: none;
 		border-radius: 1000px;
 		cursor: pointer;
-		transition: filter 0.15s ease;
 
+		transform: translateY(0px);
+		box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+		transition:
+			filter ${ease.fast},
+			transform ${ease.spring},
+			box-shadow ${ease.spring};
+ 
 		&:hover {
 			filter: brightness(0.85);
+			transform: translateY(-3px);
+			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 		}
 	}
 `);

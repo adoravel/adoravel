@@ -12,7 +12,7 @@
 	"imports": {
 		"~/": "./src/",
 		"@july/snarl": "jsr:@july/snarl@^0.3.4",
-		"@std/path": "jsr:@std/path@^1.1.4",
+		"@std/path": "jsr:@std/path@^1.1.5",
 		"@std/encoding": "jsr:@std/encoding@^1.0.10",
 		"@minify-html/deno": "jsr:@minify-html/deno@^0.18.1"
 	},

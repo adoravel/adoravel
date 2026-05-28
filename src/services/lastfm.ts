@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { withInterval } from "~/lib/interval.ts";
+import { withInterval } from "~/util/interval.ts";
 import { Song } from "~/content/songs.ts";
 
 const BASE_URL = "https://ws.audioscrobbler.com/2.0/";

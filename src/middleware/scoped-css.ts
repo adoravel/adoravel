@@ -8,7 +8,7 @@ import { Context, Middleware } from "@july/snarl";
 export const styleRegistry = new Map<string, string>();
 export const contextualisedStyles = new WeakMap<Context<any>, Set<string>>();
 
-export function cssMiddleware(): Middleware {
+export function scopedStyling(): Middleware {
 	return (ctx: Context, next: () => Promise<Response>) => {
 		if (
 			!ctx.url.pathname.startsWith("/css/") ||
@@ -33,7 +33,7 @@ export function cssMiddleware(): Middleware {
 	};
 }
 
-export function styleInjectionMiddleware(): Middleware {
+export function styleScopeInjection(): Middleware {
 	return async (ctx, next) => {
 		const res = await next();
 

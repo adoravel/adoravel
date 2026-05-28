@@ -114,7 +114,13 @@ export function css(src: string): ScopedStyling {
 
 	const createComponent = <T extends keyof HTMLElementTagNameMap>(tag: T) => {
 		const Component = function (props: Parameters<Component>[0]) {
-			const ctx = retrieveContext()!;
+			const ctx = retrieveContext();
+			if (!ctx) {
+				throw new Error(
+					`css: a component using hash "${hash}" was rendered outside of a request context. ` +
+						`ensure contextMiddleware() is registered before any route handlers`,
+				);
+			}
 
 			let mem = contextualisedStyles.get(ctx);
 			if (!mem) {

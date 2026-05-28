@@ -4,7 +4,7 @@
  */
 
 import { css } from "~/lib/css.ts";
-import { boundaries, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
+import { boundaries, ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import { Song } from "~/content/songs.ts";
 import { SongArt } from "~/components/content/SongArt.tsx";
 
@@ -15,7 +15,7 @@ const Styled = css(`
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		background: ${theme.base};
+		background-color: ${theme.base};
 		border: 1px solid ${theme.baseBorder};
 		border-radius: ${radius.lg};
 		font-size: ${fontSize.sm};
@@ -23,6 +23,38 @@ const Styled = css(`
 		
 		font-family: ${fontFamily.misc};
 		letter-spacing: ${spacing.letter.misc};
+
+		transform: translateY(0px);
+		box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+		transition:
+			transform ${ease.spring},
+			color ${ease.fast},
+			background-color ${ease.fast},
+			border-color ${ease.fast},
+			box-shadow ${ease.spring};
+
+		&:hover {			
+			transform: translateY(-4px);
+			
+			background-color: ${theme.surfaceHover};
+			border-color: ${theme.surfaceBorderHover};
+
+			box-shadow:
+				0 12px 32px rgba(0, 0, 0, 0.45),
+				0 2px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		&:hover .header {
+			border-bottom-color: ${theme.surfaceBorderHover};
+		}
+
+		&:hover :is(.release-date, .listen-link, .info-tag, .info-artist, .info-artist > span) {
+			color: ${theme.textMutedHover};
+		}
+
+		&:hover .listen-link::after {
+			background-color: ${theme.textMutedHover};
+		}
 	}
 
 	.header {
@@ -32,6 +64,8 @@ const Styled = css(`
 		padding: ${spacing[4]} ${spacing[4]};
 		gap: ${spacing[2]};
 		border-bottom: 1px solid ${theme.baseBorder};
+
+		transition: border-bottom-color ${ease.fast};
 	}
 
 	.release-date {
@@ -99,7 +133,7 @@ const Styled = css(`
 		font-size: ${fontSize.sm};
 	}
 
-	.info-artist > span {
+	.info-artist > spany {
 		color: ${theme.textMuted};
 	}
 `);
