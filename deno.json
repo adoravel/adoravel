@@ -10,6 +10,8 @@
 		}
 	},
 	"imports": {
+		"marked": "npm:marked@^18.0.4",
+		"marked-footnote": "npm:marked-footnote@^1.4.0",
 		"~/": "./src/",
 		"@july/snarl": "jsr:@july/snarl@^0.3.4",
 		"@std/path": "jsr:@std/path@^1.1.5",

@@ -6,7 +6,9 @@
     "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/internal@^1.0.14": "1.0.14",
     "jsr:@std/path@^1.1.4": "1.1.5",
-    "jsr:@std/path@^1.1.5": "1.1.5"
+    "jsr:@std/path@^1.1.5": "1.1.5",
+    "npm:marked-footnote@^1.4.0": "1.4.0_marked@18.0.4",
+    "npm:marked@^18.0.4": "18.0.4"
   },
   "jsr": {
     "@july/snarl@0.3.4": {
@@ -30,6 +32,18 @@
       "dependencies": [
         "jsr:@std/internal"
       ]
+    }
+  },
+  "npm": {
+    "marked-footnote@1.4.0_marked@18.0.4": {
+      "integrity": "sha512-fZTxAhI1TcLEs5UOjCfYfTHpyKGaWQevbxaGTEA68B51l7i87SctPFtHETYqPkEN0ka5opvy4Dy1l/yXVC+hmg==",
+      "dependencies": [
+        "marked"
+      ]
+    },
+    "marked@18.0.4": {
+      "integrity": "sha512-c/BTaKzg0G6ezQx97DAkYU7k0HM6ys0FqYeKBL6hlBByZwy+ycA1+f0vDdjMHKKeEjdgkx0GOv9Il6D+85cOqA==",
+      "bin": true
     }
   },
   "redirects": {
@@ -69,7 +83,9 @@
       "jsr:@july/snarl@~0.3.4",
       "jsr:@minify-html/deno@~0.18.1",
       "jsr:@std/encoding@^1.0.10",
-      "jsr:@std/path@^1.1.5"
+      "jsr:@std/path@^1.1.5",
+      "npm:marked-footnote@^1.4.0",
+      "npm:marked@^18.0.4"
     ]
   }
 }

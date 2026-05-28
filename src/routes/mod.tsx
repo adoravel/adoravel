@@ -135,7 +135,7 @@ const Styled = css(`
 
 export default () => {
 	return (
-		<Layout scope={Styled}>
+		<Layout scope={Styled} selected="home">
 			<head>
 				<title>hewo!!</title>
 				<link rel="stylesheet" href="/fonts/space-grotesk/import.css" />

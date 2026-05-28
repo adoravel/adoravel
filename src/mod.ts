@@ -21,6 +21,6 @@ router.use(
 	styleScopeInjection(),
 );
 
-scan(router);
+await scan(router);
 
 Deno.serve({ port: 8254 }, router.fetch);

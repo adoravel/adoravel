@@ -20,15 +20,15 @@ const Styled = css(`
 		margin: ${spacing.section} 0;
 	}
 
-	.highlight {
+	.footer-highlight {
 		color: ${theme.text};
 		font-weight: 500;
-	}
 
-	.highlight-rose {
-		color: ${theme.rose};
+		&::after {
+			background-color: ${theme.text};
+		}
 	}
-
+	
 	ul {
 		display: flex;
 		flex-wrap: wrap;
@@ -73,15 +73,15 @@ export default function Footer() {
 		<Styled.footer>
 			<hr />
 			<p>
-				© {new Date().getFullYear()} <span class="highlight">kyu.re</span>
+				© {new Date().getFullYear()} <span class="footer-highlight">kyu.re</span>
 				{" · "}
 				Made with <span class="highlight-rose">❤</span> · Source code available at{" "}
-				<a class="highlight" href="https://kyu.re/~web">https://kyu.re/~web</a> under the{" "}
-				<a class="highlight" href="https://spdx.org/licenses/AGPL-3.0-or-later.html">
+				<a class="footer-highlight" href="https://kyu.re/~web">https://kyu.re/~web</a> under the{" "}
+				<a class="footer-highlight" href="https://spdx.org/licenses/AGPL-3.0-or-later.html">
 					GNU Affero General Public License v3.0
 				</a>
 				, with all site content licensed under{" "}
-				<a class="highlight" href="https://creativecommons.org/licenses/by-sa/4.0/">
+				<a class="footer-highlight" href="https://creativecommons.org/licenses/by-sa/4.0/">
 					CC BY-SA 4.0
 				</a>
 				.
