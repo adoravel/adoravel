@@ -8,7 +8,7 @@ import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx
 import type { Post, TextSegment } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky } from "~/components/ui/Icon.tsx";
-import { formatPostDate } from "~/util/formatting.ts";
+import { flattenThread, formatPostDate } from "~/util/formatting.ts";
 
 const Styled = css(`
 	:scope {
@@ -236,6 +236,7 @@ function truncateSegments(segments: TextSegment[]): TextSegment[] {
 
 export default function TimelinePost({ post, profile }: { post: Post; profile: Profile }) {
 	const hasReplies = post.replies && post.replies.length > 0;
+	const items = flattenThread(post);
 
 	return (
 		<Styled.div>
@@ -261,7 +262,7 @@ export default function TimelinePost({ post, profile }: { post: Post; profile: P
 					{hasReplies && (
 						<div class="thread-indicator">
 							<Knot />
-							{post.replies?.length ?? 0} more {(post.replies?.length ?? 0) === 1 ? "skeet" : "more skeets"}{" "}
+							{items.length - 1} more {(items.length - 1) === 1 ? "skeet" : "more skeets"}{" "}
 							in this thread
 						</div>
 					)}

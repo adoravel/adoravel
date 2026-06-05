@@ -1,3 +1,15 @@
+import { Post } from "~/content/post.ts";
+
+export function flattenThread(post: Post, isRoot: boolean = true): Array<Post & { isRoot: boolean }> {
+	const flat = [{ ...post, isRoot }];
+	if (post.replies && post.replies.length > 0) {
+		for (const reply of post.replies) {
+			flat.push(...flattenThread(reply, false));
+		}
+	}
+	return flat;
+}
+
 export function formatPostDate(date: Date): string {
 	const now = Date.now();
 	const diff = now - date.getTime();

@@ -118,8 +118,21 @@ const styles = /* css */ `
 `;
 
 interface CollectResult {
-	head: JsxNode[];
+	head: Map<string, JsxNode>;
 	body: JsxNode[];
+}
+
+function getHeadKey(node: JsxNode): string | null {
+	if (typeof node !== "object" || node === null || !("tag" in node)) return null;
+	const { tag, props } = node as JsxElement;
+
+	if (tag === "title") return "__title__";
+	if (tag === "meta") {
+		if (props.property) return `meta::property::${props.property}`;
+		if (props.name) return `meta::name::${props.name}`;
+		if (props.charset) return "meta::charset";
+	}
+	return null;
 }
 
 function collect(node: JsxNode, result: CollectResult): void {
@@ -134,9 +147,19 @@ function collect(node: JsxNode, result: CollectResult): void {
 	}
 
 	const { tag, props } = node as JsxElement;
-
 	if (tag === "head") {
-		return void result.head.push(props.children);
+		const tempBody: JsxNode[] = [];
+		collect(props.children, { head: new Map(), body: tempBody });
+
+		for (const child of tempBody) {
+			const key = getHeadKey(child);
+			if (key) {
+				result.head.set(key, child);
+			} else {
+				result.head.set(`__raw__${Math.random()}`, child);
+			}
+		}
+		return;
 	}
 
 	if (typeof tag === "function") {
@@ -148,17 +171,29 @@ function collect(node: JsxNode, result: CollectResult): void {
 		return void result.body.push(node);
 	}
 
-	const child: CollectResult = { head: [], body: [] };
+	const child: CollectResult = { head: new Map(), body: [] };
 	collect(props.children, child);
 
-	if (child.head.length) {
-		result.head.push(...child.head);
+	for (const [key, value] of child.head) {
+		result.head.set(key, value);
 	}
 	result.body.push(jsx(tag, { ...props, children: child.body as any }));
 }
 
 export function Layout({ scope, children, class: className, selected }: LayoutProps) {
-	const result: CollectResult = { head: [], body: [] };
+	const result: CollectResult = { head: new Map(), body: [] };
+
+	const globalHeadTags = [
+		jsx("meta", { property: "og:site_name", content: "kyu.re" }),
+		jsx("meta", { property: "og:type", content: "profile" }),
+		jsx("meta", { property: "og:description", content: "one of the girls of all time" }),
+		jsx("meta", { property: "og:image", content: "https://kyu.re/~.png" }),
+		jsx("meta", { property: "og:image:type", content: "image/png" }),
+		jsx("meta", { property: "og:title", content: "júlia lívia" }),
+		jsx("meta", { name: "theme-color", content: tokens.theme.accentDim }),
+	];
+
+	collect(jsx("head", { children: globalHeadTags }), result);
 	collect(children, result);
 
 	return "<!DOCTYPE html>" + (
@@ -167,18 +202,11 @@ export function Layout({ scope, children, class: className, selected }: LayoutPr
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" type="image/png" href="/favicon.png" />
-				<meta property="og:site_name" content="kyu.re" />
-				<meta property="og:type" content="profile" />
-				<meta property="og:description" content="one of the girls of all time" />
-				<meta property="og:image" content="https://kyu.re/~.png" />
-				<meta property="og:image:type" content="image/png" />
-				<meta property="og:title" content="júlia lívia" />
 				<meta name="view-transition" content="same-origin" />
-				<meta name="theme-color" content={tokens.theme.accentDim} />
+				{[...result.head.values()]}
 				<link rel="stylesheet" href="/fonts/iosevka-custom/import.css" />
 				<link rel="stylesheet" href="/fonts/bricolage-grotesque/import.css" />
 				<style>{styles}</style>
-				{result.head}
 			</head>
 			<scope.body class={className}>
 				<NavigationBar items={nav} selected={selected ?? ""} />

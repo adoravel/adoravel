@@ -8,7 +8,7 @@ import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx
 import type { Post, TextSegment } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky, ExternalLink } from "~/components/ui/Icon.tsx";
-import { formatPostDate } from "~/util/formatting.ts";
+import { flattenThread, formatPostDate } from "~/util/formatting.ts";
 
 const Styled = css(`
 	:scope {
@@ -238,16 +238,6 @@ function renderSegments(segments: TextSegment[]) {
 				return seg.text;
 		}
 	});
-}
-
-function flattenThread(post: Post, isRoot: boolean = true): Array<Post & { isRoot: boolean }> {
-	const flat = [{ ...post, isRoot }];
-	if (post.replies && post.replies.length > 0) {
-		for (const reply of post.replies) {
-			flat.push(...flattenThread(reply, false));
-		}
-	}
-	return flat;
 }
 
 export default function PostDetail({ post, profile }: { post: Post; profile: Profile }) {
