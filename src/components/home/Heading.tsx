@@ -27,6 +27,7 @@ const Styled = css(`
 		width: 100%;
 		margin-top: ${spacing[6]};
 		margin-bottom: ${spacing.section};
+		user-select: none;
 	}
 
 	.typography-stack {

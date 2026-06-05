@@ -52,14 +52,14 @@ export const projects: Project[] = [
 		license: "BSD-3-Clause",
 		lang: ProjectLanguage.TypeScript,
 	},
-	{
-		author: "w",
-		name: "terracotta",
-		description: "mill-based toolchain for crossplatform and multi-version minecraft mod development",
-		url: "/~terracotta",
-		license: "LGPL-3.0",
-		lang: ProjectLanguage.Scala,
-	},
+	// {
+	// 	author: "w",
+	// 	name: "terracotta",
+	// 	description: "mill-based toolchain for crossplatform and multi-version minecraft mod development",
+	// 	url: "/~terracotta",
+	// 	license: "LGPL-3.0",
+	// 	lang: ProjectLanguage.Scala,
+	// },
 	{
 		author: "w",
 		name: "wildcat",

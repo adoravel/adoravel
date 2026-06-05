@@ -84,8 +84,7 @@ const Styled = css(`
 	}
 
 	.thread-item:hover .dot-node {
-		background: ${theme.accent};
-		transform: scale(1.5);
+		background: ${theme.textMuted};
 	}
 
 	.thread-content {
