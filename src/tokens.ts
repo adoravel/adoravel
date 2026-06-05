@@ -97,6 +97,7 @@ export const tokens = createTheme({
 	ease: {
 		fast: "0.16s ease-in-out",
 		spring: "0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+		reveal: "0.4s cubic-bezier(0.16, 1, 0.3, 1)",
 	},
 	elevation: {
 		below: "-1",

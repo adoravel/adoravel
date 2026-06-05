@@ -6,7 +6,9 @@
 import { css } from "~/lib/css.ts";
 import { boundaries, ease, fontFamily, fontSize, Layout, radius, spacing, theme } from "~/layout.tsx";
 import Footer from "~/components/layout/Footer.tsx";
-import { getPost } from "~/services/blog.ts";
+import PostDetail from "~/components/content/PostDetail.tsx";
+import { getPost as getBskyPost, getProfile } from "~/services/post.ts";
+import { getPost as getBlogPost } from "~/services/blog.ts";
 import type { Context } from "@july/snarl";
 
 const Styled = css(`
@@ -21,6 +23,14 @@ const Styled = css(`
 		z-index: 100;
 		animation: read-progress linear both;
 		animation-timeline: scroll(root block);
+
+		@supports not (animation-timeline: scroll(root block)) {
+			display: none;
+		}
+
+		@media (max-width: ${boundaries.mobileMaxWidth}) {
+    	display: none;
+		}
 	}
 
 	@keyframes read-progress {
@@ -260,7 +270,40 @@ function formatDate(input: Date) {
 
 export default (ctx: Context) => {
 	const { slug } = ctx.params as { slug: string };
-	const post = getPost(slug);
+	const post = getBlogPost(slug);
+
+	const bskyPost = !post ? getBskyPost(slug) : undefined;
+	const bskyProfile = bskyPost ? getProfile() : undefined;
+
+	if (bskyPost && bskyProfile) {
+		const description = bskyPost.text.length > 150 ? bskyPost.text.slice(0, 147) + "…" : bskyPost.text;
+		const imageUrl = bskyProfile.avatarUrl;
+		const title = `${bskyProfile.displayName} on kyu.re`;
+
+		return (
+			<Layout scope={Styled} selected="reports">
+				<head>
+					<title>{bskyPost.text.slice(0, 30)}... :: kyu.re</title>
+					<meta name="description" content={description} />
+					<meta property="og:title" content={title} />
+					<meta property="og:description" content={description} />
+					<meta property="og:type" content="article" />
+					{imageUrl && <meta property="og:image" content={imageUrl} />}
+					<meta property="og:image:alt" content={`${bskyProfile.displayName}'s avatar`} />
+					<meta name="twitter:card" content={imageUrl ? "summary" : "summary_large_image"} />
+					<meta name="twitter:title" content={title} />
+					<meta name="twitter:description" content={description} />
+					{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+				</head>
+				<div class="progress" aria-hidden="true" />
+				<a class="back" href="/reports">← reports</a>
+				<article>
+					<PostDetail post={bskyPost} profile={bskyProfile} />
+				</article>
+				<Footer />
+			</Layout>
+		);
+	}
 
 	if (!post) {
 		return new Response(
@@ -288,11 +331,17 @@ export default (ctx: Context) => {
 				<meta property="og:title" content={post.title} />
 				<meta property="og:description" content={post.summary} />
 				<meta property="og:type" content="article" />
+				<meta property="article:published_time" content={post.createdAt.toISOString()} />
+				{post.updatedAt && <meta property="article:modified_time" content={post.updatedAt.toISOString()} />}
+				{post.tags.map((tag) => <meta key={tag} property="article:tag" content={tag} />)}
+				<meta name="twitter:card" content={post.cover ? "summary_large_image" : "summary"} />
+				<meta name="twitter:title" content={post.title} />
+				<meta name="twitter:description" content={post.summary} />
 			</head>
 			<div class="progress" aria-hidden="true" />
 			<a class="back" href="/reports">← reports</a>
 			<article>
-				<header class="post-header">
+				<header class="post-header main">
 					<span class="post-date">{formatDate(post.createdAt)}</span>
 					<h1 class="post-title">
 						{post.title}

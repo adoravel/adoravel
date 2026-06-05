@@ -140,7 +140,7 @@ export default () => {
 				<title>hewo!!</title>
 				<link rel="stylesheet" href="/fonts/space-grotesk/import.css" />
 			</head>
-			<header id="heading">
+			<header class="main" id="heading">
 				<Hero />
 			</header>
 			<section id="intro">

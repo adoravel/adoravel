@@ -4,7 +4,7 @@
  */
 
 import { css } from "~/lib/css.ts";
-import { Fluxer, GitHub, Mail, Tangled } from "~/components/ui/Icon.tsx";
+import { Fluxer, Mail, Tangled } from "~/components/ui/Icon.tsx";
 import { ease, fontSize, spacing, theme } from "~/layout.tsx";
 
 const Styled = css(`
@@ -87,12 +87,6 @@ export default function Footer() {
 				.
 			</p>
 			<ul>
-				<li>
-					<a href="https://github.com/adoravel">
-						<GitHub />
-						adoravel
-					</a>
-				</li>
 				<li>
 					<a href="https://tangled.org/kyu.re">
 						<Tangled />

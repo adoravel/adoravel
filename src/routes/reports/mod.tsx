@@ -9,8 +9,10 @@ import Heading from "~/components/ui/Heading.tsx";
 import Footer from "~/components/layout/Footer.tsx";
 import { BlogCard } from "~/components/content/BlogCard.tsx";
 import { filterPostsByTag, getPosts as getPosts, getTags } from "~/services/blog.ts";
+import { getPosts as getBskyPosts, getProfile as getBskyProfile } from "~/services/post.ts";
 
 import type { Context } from "@july/snarl";
+import Timeline from "~/components/content/Timeline.tsx";
 
 const Styled = css(`
 	.header-row {
@@ -123,6 +125,9 @@ export default async (ctx: Context) => {
 		drafts.push(posts.splice(index, 1)[0]);
 	}
 
+	const bskyPosts = getBskyPosts() ?? [];
+	const bskyProfile = getBskyProfile() ?? { displayName: "handle.invalid", handle: "handle.invalid", url: "/" };
+
 	return (
 		<Layout scope={Styled} selected="reports">
 			<head>
@@ -130,7 +135,7 @@ export default async (ctx: Context) => {
 			</head>
 			<div class="header-row">
 				<Heading>
-					{tag ? `#${tag}` : "Reports"}
+					{`${tag ? `#${tag}` : "Reports"}`}
 				</Heading>
 				<span class="post-count">{posts.length} {posts.length === 1 ? "post" : "posts"}</span>
 			</div>
@@ -156,7 +161,7 @@ export default async (ctx: Context) => {
 				</ul>
 			)}
 
-			<ul class="grid" style={{ listStyle: "none", padding: 0 }}>
+			<ul class="main grid" style={{ listStyle: "none", padding: 0 }}>
 				{posts.length > 0
 					? posts.map((post) => (
 						<li key={post.identity.rkey}>
@@ -185,6 +190,19 @@ export default async (ctx: Context) => {
 							</li>
 						))}
 					</ul>
+				</>
+			)}
+
+			{!tag && bskyPosts.length > 0 && (
+				<>
+					<div class="squiggly-divider" aria-hidden="true" />
+					<div class="timeline-container">
+						<div class="header-row">
+							<Heading>Microblogging</Heading>
+							<span class="post-count">{bskyPosts.length} {bskyPosts.length === 1 ? "note" : "notes"}</span>
+						</div>
+						<Timeline posts={bskyPosts} profile={bskyProfile} />
+					</div>
 				</>
 			)}
 

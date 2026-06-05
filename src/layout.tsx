@@ -27,14 +27,18 @@ const styles = /* css */ `
 		box-sizing: border-box;
 		margin: 0;
 	}
-	
+
+	.main {
+		view-transition-name: main-content;
+	}
+
 	html, body {
 		background-color: ${tokens.theme.background};
 		color: ${tokens.theme.text};
 	}
 
 	html {
-    	overflow-x: clip;
+		overflow-x: clip;
 		font-family: ${tokens.fontFamily.default};
 		font-weight: 400;
 		line-height: ${tokens.boundaries.lineHeight};
@@ -169,6 +173,7 @@ export function Layout({ scope, children, class: className, selected }: LayoutPr
 				<meta property="og:image" content="https://kyu.re/~.png" />
 				<meta property="og:image:type" content="image/png" />
 				<meta property="og:title" content="júlia lívia" />
+				<meta name="view-transition" content="same-origin" />
 				<meta name="theme-color" content={tokens.theme.accentDim} />
 				<link rel="stylesheet" href="/fonts/iosevka-custom/import.css" />
 				<link rel="stylesheet" href="/fonts/bricolage-grotesque/import.css" />
