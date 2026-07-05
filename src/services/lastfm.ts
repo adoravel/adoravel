@@ -101,7 +101,7 @@ export async function getRecentTracks(
 	});
 }
 
-export const tracks = await withInterval(async () => {
+export const tracks = withInterval(async () => {
 	const { recenttracks } = await getRecentTracks(lastfm.user, 1, 5);
 
 	return recenttracks.track?.map((track) =>

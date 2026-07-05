@@ -5,10 +5,11 @@
 
 import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
-import type { Post, TextSegment } from "~/content/post.ts";
+import { type Post } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky } from "~/components/ui/Icon.tsx";
 import { flattenThread, formatPostDate } from "~/util/formatting.ts";
+import { PostSegments, truncateSegments } from "~/components/content/PostSegments.tsx";
 
 const Styled = css`
 	:scope {
@@ -161,52 +162,6 @@ const Styled = css`
 	}
 `;
 
-function renderSegments(segments: TextSegment[]) {
-	return segments.map((seg, i) => {
-		switch (seg.type) {
-			case "link":
-				return (
-					<a
-						key={i}
-						href={seg.uri}
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={(e: any) => e.stopPropagation()}
-					>
-						{seg.text}
-					</a>
-				);
-			case "mention":
-				return (
-					<a
-						key={i}
-						href={`https://bsky.app/profile/${seg.did}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={(e: any) => e.stopPropagation()}
-					>
-						{seg.text}
-					</a>
-				);
-			case "tag":
-				return (
-					<a
-						key={i}
-						class="tl-hashtag"
-						href={`https://bsky.app/search?q=%23${seg.tag}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={(e: any) => e.stopPropagation()}
-					>
-						{seg.text}
-					</a>
-				);
-			default:
-				return seg.text;
-		}
-	});
-}
-
 function Knot() {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -220,20 +175,6 @@ function Knot() {
 			</g>
 		</svg>
 	);
-}
-
-function truncateSegments(segments: TextSegment[]): TextSegment[] {
-	if (!segments.length) return segments;
-
-	const last = segments[segments.length - 1];
-	if (last.type !== "text" || !last.text) return segments;
-
-	const text = last.text.replace(/[.,]+\s*$/, "");
-
-	return [
-		...segments.slice(0, -1),
-		{ ...last, text: text + "…" },
-	];
 }
 
 export default function TimelinePost({ post, profile }: { post: Post; profile: Profile }) {
@@ -259,7 +200,7 @@ export default function TimelinePost({ post, profile }: { post: Post; profile: P
 						<span class="handle">@{profile.handle ?? "handle.invalid"}</span>
 					</div>
 					<div class="body">
-						{renderSegments(truncateSegments(post.segments))}
+						<PostSegments segments={truncateSegments(post.segments)} stopPropagation />
 					</div>
 					{hasReplies && (
 						<div class="thread-indicator">

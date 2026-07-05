@@ -10,11 +10,11 @@
 		}
 	},
 	"imports": {
-		"@404/imouto": "jsr:@404/imouto@^0.1.3",
+		"@404/imouto": "jsr:@404/imouto@^0.1.5",
 		"marked": "npm:marked@^18.0.5",
 		"marked-footnote": "npm:marked-footnote@^1.4.0",
 		"~/": "./src/",
-		"@july/snarl": "jsr:@july/snarl@^1.0.0",
+		"@july/snarl": "jsr:@july/snarl@^1.0.2",
 		"@std/path": "jsr:@std/path@^1.1.6",
 		"@std/encoding": "jsr:@std/encoding@^1.0.11",
 		"@minify-html/deno": "jsr:@minify-html/deno@^0.18.1"

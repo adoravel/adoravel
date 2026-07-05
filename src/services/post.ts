@@ -280,7 +280,7 @@ async function fetchTaggedPosts(config: PostsServiceConfig): Promise<{ posts: Po
 	};
 }
 
-export const data: () => Awaited<ReturnType<typeof fetchTaggedPosts>> | undefined = await withInterval(
+export const data: () => Awaited<ReturnType<typeof fetchTaggedPosts>> | undefined = withInterval(
 	async () => {
 		try {
 			return await fetchTaggedPosts(config);

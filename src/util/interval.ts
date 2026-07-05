@@ -3,28 +3,21 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-export async function withInterval<T>(
+export function withInterval<T>(
 	callback: () => Promise<T>,
 	seconds: number,
-): Promise<() => T | undefined> {
+): () => T | undefined {
 	let value: T | undefined;
 
-	try {
-		value = await callback();
-	} catch (e) {
-		console.warn("[interval] initial call failed, will retry:", e);
-	}
-
-	async function tick(): Promise<void> {
+	async function tick(isInitial: boolean): Promise<void> {
 		try {
 			value = await callback();
 		} catch (e) {
-			console.warn("[interval] tick failed, keeping stale value:", e);
+			console.warn(`[interval] ${isInitial ? "initial call" : "tick"} failed, keeping stale value:`, e);
 		}
-		setTimeout(tick, seconds * 1000);
+		setTimeout(() => tick(false), seconds * 1000);
 	}
 
-	setTimeout(tick, seconds * 1000);
-
+	tick(true);
 	return () => value;
 }

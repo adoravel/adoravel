@@ -1,9 +1,9 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@404/imouto@~0.1.3": "0.1.3",
-    "jsr:@404/varnish@~0.1.1": "0.1.1",
-    "jsr:@july/snarl@1": "1.0.0",
+    "jsr:@404/imouto@~0.1.5": "0.1.5",
+    "jsr:@404/varnish@~0.1.2": "0.1.2",
+    "jsr:@july/snarl@^1.0.2": "1.0.2",
     "jsr:@minify-html/deno@~0.18.1": "0.18.1",
     "jsr:@std/encoding@^1.0.11": "1.0.11",
     "jsr:@std/fmt@^1.0.10": "1.0.10",
@@ -13,8 +13,8 @@
     "npm:marked@^18.0.5": "18.0.5"
   },
   "jsr": {
-    "@404/imouto@0.1.3": {
-      "integrity": "b972a09e9f3b150ddc6d62457e2f1ea73c3beb0ff1f69de6b90fa621076133b4",
+    "@404/imouto@0.1.5": {
+      "integrity": "4cd4362713a104d0a630f001386007ccb7b9a097933c80b853ff7454baee66db",
       "dependencies": [
         "jsr:@404/varnish",
         "jsr:@july/snarl",
@@ -22,15 +22,15 @@
         "jsr:@std/path"
       ]
     },
-    "@404/varnish@0.1.1": {
-      "integrity": "6f1ca858a074fd6387d009333e88b1757be2ac6e0628d49293ce91d5ad90e48d",
+    "@404/varnish@0.1.2": {
+      "integrity": "76643603b967bb2937ae7b5efcd752d4247ab049a0a6c73af6677af93dd17aba",
       "dependencies": [
         "jsr:@july/snarl",
         "jsr:@minify-html/deno"
       ]
     },
-    "@july/snarl@1.0.0": {
-      "integrity": "75d5162ba12f89d498cd1b46a1888a61a7283bed2272a11a5703dd5ac6e81f68",
+    "@july/snarl@1.0.2": {
+      "integrity": "694871ec567284e816707d6250c1cb69ff0e3c9494895e6f60be74ff1037a5e2",
       "dependencies": [
         "jsr:@std/encoding",
         "jsr:@std/fmt",
@@ -104,8 +104,8 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@404/imouto@~0.1.3",
-      "jsr:@july/snarl@1",
+      "jsr:@404/imouto@~0.1.5",
+      "jsr:@july/snarl@^1.0.2",
       "jsr:@minify-html/deno@~0.18.1",
       "jsr:@std/encoding@^1.0.11",
       "jsr:@std/path@^1.1.6",

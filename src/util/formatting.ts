@@ -24,9 +24,10 @@ export function formatPostDate(date: Date): string {
 	if (diff < 86_400_000) return `${Math.floor(diff / 3_600_000)}h ago`;
 	if (diff < 7 * 86_400_000) return `${Math.floor(diff / 86_400_000)}d ago`;
 
+	const currentYear = new Date(now).getFullYear();
 	return date.toLocaleDateString("en-US", {
 		month: "short",
 		day: "numeric",
-		year: date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
+		year: date.getFullYear() !== currentYear ? "numeric" : undefined,
 	});
 }

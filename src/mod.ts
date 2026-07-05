@@ -15,4 +15,4 @@ router.use(staticFiles("./assets", {
 	maxAge: 259200,
 }));
 
-router.serve();
+router.serve({ port: 8254 });

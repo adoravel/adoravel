@@ -5,10 +5,11 @@
 
 import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
-import type { Post, TextSegment } from "~/content/post.ts";
+import { type Post } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky, ExternalLink } from "~/components/ui/Icon.tsx";
 import { flattenThread, formatPostDate } from "~/util/formatting.ts";
+import { PostSegments } from "~/components/content/PostSegments.tsx";
 
 const Styled = css`
 	:scope {
@@ -225,35 +226,6 @@ const Styled = css`
 	}
 `;
 
-function renderSegments(segments: TextSegment[]) {
-	return segments.map((seg, i) => {
-		switch (seg.type) {
-			case "link":
-				return <a key={i} href={seg.uri} target="_blank" rel="noopener noreferrer">{seg.text}</a>;
-			case "mention":
-				return (
-					<a key={i} href={`https://bsky.app/profile/${seg.did}`} target="_blank" rel="noopener noreferrer">
-						{seg.text}
-					</a>
-				);
-			case "tag":
-				return (
-					<a
-						key={i}
-						class="post-hashtag"
-						href={`https://bsky.app/search?q=%23${seg.tag}`}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{seg.text}
-					</a>
-				);
-			default:
-				return seg.text;
-		}
-	});
-}
-
 export default function PostDetail({ post, profile }: { post: Post; profile: Profile }) {
 	const items = flattenThread(post);
 
@@ -293,7 +265,7 @@ export default function PostDetail({ post, profile }: { post: Post; profile: Pro
 								</div>
 							)}
 							<div class="body">
-								{renderSegments(item.segments)}
+								<PostSegments segments={item.segments} />
 							</div>
 							{item.embed && "images" in item.embed && item.embed?.images && item.embed.images?.length > 0 && (
 								<div class="embeds">

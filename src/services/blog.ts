@@ -212,7 +212,7 @@ async function fetchPosts(
 		.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 }
 
-export const getPosts: () => BlogPost[] | undefined = await withInterval(
+export const getPosts: () => BlogPost[] | undefined = withInterval(
 	() => fetchPosts(blogConfig, "all"),
 	blogConfig.pollInterval,
 );
