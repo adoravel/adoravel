@@ -1,16 +1,16 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import type { Post, TextSegment } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky, ExternalLink } from "~/components/ui/Icon.tsx";
 import { flattenThread, formatPostDate } from "~/util/formatting.ts";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: flex;
 		flex-direction: column;
@@ -30,12 +30,18 @@ const Styled = css(`
 	}
 
 	@keyframes detail-slide-up {
-		from { opacity: 0; transform: translateY(12px); }
-		to { opacity: 1; transform: translateY(0); }
+		from {
+			opacity: 0;
+			transform: translateY(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.thread-item::after {
-		content: '';
+		content: "";
 		position: absolute;
 		left: 23px;
 		top: 72px;
@@ -66,12 +72,16 @@ const Styled = css(`
 		z-index: 2;
 		border: 2px solid ${theme.background};
 		overflow: hidden;
-		display: flex; 
-		align-items: center; 
+		display: flex;
+		align-items: center;
 		justify-content: center;
 		color: ${theme.textMuted};
-		
-		img { width: 100%; height: 100%; object-fit: cover; }
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 
 	.dot-node {
@@ -91,7 +101,7 @@ const Styled = css(`
 		flex: 1;
 		min-width: 0;
 		padding: ${spacing[2]} ${spacing[3]} ${spacing[2]};
-		margin-left: ${spacing[1]}; 
+		margin-left: ${spacing[1]};
 		border-radius: ${radius.lg};
 		transition: background-color ${ease.fast};
 	}
@@ -130,7 +140,9 @@ const Styled = css(`
 		opacity: 0.6;
 		transition: opacity ${ease.fast}, color ${ease.fast};
 
-		&::after { display: none !important; }
+		&::after {
+			display: none !important;
+		}
 
 		&:hover {
 			opacity: 1;
@@ -184,8 +196,10 @@ const Styled = css(`
 		text-decoration: none;
 		margin-top: ${spacing[3]};
 		overflow: hidden;
-		
-		&::after { display: none !important; }
+
+		&::after {
+			display: none !important;
+		}
 
 		&:hover {
 			border-color: ${theme.surfaceBorderHover};
@@ -197,7 +211,7 @@ const Styled = css(`
 		opacity: 0;
 		transition: opacity ${ease.fast}, max-height ${ease.fast}, margin ${ease.fast};
 		vertical-align: middle;
-		    
+
 		font-size: ${fontSize.xs};
 		color: ${theme.textMuted};
 		font-family: ${fontFamily.misc};
@@ -209,7 +223,7 @@ const Styled = css(`
 		margin-left: 1.25ch;
 		opacity: 1;
 	}
-`);
+`;
 
 function renderSegments(segments: TextSegment[]) {
 	return segments.map((seg, i) => {

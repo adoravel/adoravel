@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontSize, spacing, theme } from "~/layout.tsx";
 
 interface Props<T extends readonly [string, string][]> {
@@ -11,7 +11,7 @@ interface Props<T extends readonly [string, string][]> {
 	selected: T[number][0];
 }
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: flex;
 		flex-wrap: wrap;
@@ -44,10 +44,7 @@ const Styled = css(`
 		transition: color 0.15s ease, background-color 0.15s ease;
 
 		transform: translateY(0px);
-		transition:
-			color ${ease.fast},
-			background-color ${ease.fast},
-			transform ${ease.spring};
+		transition: color ${ease.fast}, background-color ${ease.fast}, transform ${ease.spring};
 	}
 
 	.item:hover {
@@ -66,7 +63,7 @@ const Styled = css(`
 		transform: translateY(-2px);
 		box-shadow: 0 6px 18px rgba(166, 181, 247, 0.35);
 	}
-`);
+`;
 
 export function NavigationBar<P extends readonly [string, string][]>({ items, selected }: Props<P>) {
 	if (!items || items.length === 0) return null;

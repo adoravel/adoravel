@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import type { BlogPostSummary } from "~/content/blog.ts";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: block;
 		position: relative;
@@ -30,9 +30,7 @@ const Styled = css(`
 		transform: translateY(-5px);
 		border-color: ${theme.surfaceBorderHover};
 		background-color: ${theme.surfaceHover};
-		box-shadow:
-			0 14px 36px rgba(0, 0, 0, 0.45),
-			0 2px 14px rgba(0, 0, 0, 0, 0.1);
+		box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), 0 2px 14px rgba(0, 0, 0, 0, 0.1);
 	}
 
 	.date {
@@ -53,7 +51,9 @@ const Styled = css(`
 		transition: color ${ease.fast};
 	}
 
-	:scope:hover .title { color: ${theme.onAccent}; }
+	:scope:hover .title {
+		color: ${theme.onAccent};
+	}
 
 	.description {
 		font-size: ${fontSize.md};
@@ -116,7 +116,7 @@ const Styled = css(`
 		opacity: 1;
 		transform: translate(0, 0) scale(1);
 	}
-`);
+`;
 
 function formatDate(iso: Date) {
 	return iso.toLocaleDateString("en-US", {

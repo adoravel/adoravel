@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css, Head } from "@404/imouto";
 import { boundaries, ease, fontFamily, fontSize, Layout, radius, spacing, theme } from "~/layout.tsx";
 import Footer from "~/components/layout/Footer.tsx";
 import PostDetail from "~/components/content/PostDetail.tsx";
@@ -11,7 +11,7 @@ import { getPost as getBskyPost, getProfile } from "~/services/post.ts";
 import { getPost as getBlogPost } from "~/services/blog.ts";
 import type { Context } from "@july/snarl";
 
-const Styled = css(`
+const Styled = css`
 	.progress {
 		position: fixed;
 		top: 0;
@@ -29,19 +29,23 @@ const Styled = css(`
 		}
 
 		@media (max-width: ${boundaries.mobileMaxWidth}) {
-    	display: none;
+			display: none;
 		}
 	}
 
 	@keyframes read-progress {
-		from { transform: scaleX(0); }
-		to   { transform: scaleX(1); }
+		from {
+			transform: scaleX(0);
+		}
+		to {
+			transform: scaleX(1);
+		}
 	}
 
 	[data-footnote-ref], [data-footnote-backref] {
 		margin-left: 0.2ch;
 		font-weight: 800;
-    
+
 		&::after {
 			display: none;
 		}
@@ -63,7 +67,9 @@ const Styled = css(`
 		transform: translateX(-4px);
 	}
 
-	.back::after { display: none !important; }
+	.back::after {
+		display: none !important;
+	}
 
 	.post-header {
 		margin-bottom: ${spacing[8]};
@@ -135,7 +141,9 @@ const Styled = css(`
 		transform: translateY(-2px);
 	}
 
-	.tag::after { display: none !important; }
+	.tag::after {
+		display: none !important;
+	}
 
 	.reading-time {
 		margin-left: auto;
@@ -153,9 +161,15 @@ const Styled = css(`
 		margin-bottom: 0.6em;
 	}
 
-	.prose h2 { font-size: ${fontSize.xl}; }
-	.prose h3 { font-size: ${fontSize.lg}; }
-	.prose h4 { font-size: ${fontSize.base}; }
+	.prose h2 {
+		font-size: ${fontSize.xl};
+	}
+	.prose h3 {
+		font-size: ${fontSize.lg};
+	}
+	.prose h4 {
+		font-size: ${fontSize.base};
+	}
 
 	.prose p {
 		font-size: ${fontSize.body};
@@ -164,10 +178,17 @@ const Styled = css(`
 		margin-bottom: 1.25em;
 	}
 
-	.prose strong { color: ${theme.text}; font-weight: 600; }
-	.prose em     { color: ${theme.subtext}; }
+	.prose strong {
+		color: ${theme.text};
+		font-weight: 600;
+	}
+	.prose em {
+		color: ${theme.subtext};
+	}
 
-	.prose a { color: ${theme.accent}; }
+	.prose a {
+		color: ${theme.accent};
+	}
 
 	.prose blockquote {
 		border-left: 2px solid ${theme.accent};
@@ -179,7 +200,7 @@ const Styled = css(`
 	}
 
 	.prose blockquote p:last-of-type {
-	  margin-bottom: 0;
+		margin-bottom: 0;
 	}
 
 	.prose hr {
@@ -223,7 +244,9 @@ const Styled = css(`
 		margin-bottom: 1.25em;
 	}
 
-	.prose li { margin-bottom: 0.4em; }
+	.prose li {
+		margin-bottom: 0.4em;
+	}
 
 	.not-found {
 		text-align: center;
@@ -258,7 +281,7 @@ const Styled = css(`
 		border-radius: ${radius.circle};
 		padding: ${spacing.pill};
 	}
-`);
+`;
 
 function formatDate(input: Date) {
 	return input.toLocaleDateString("en-US", {
@@ -282,7 +305,7 @@ export default (ctx: Context) => {
 
 		return (
 			<Layout scope={Styled} selected="reports">
-				<head>
+				<Head>
 					<title>{bskyPost.text.slice(0, 30)}... :: kyu.re</title>
 					<meta name="description" content={description} />
 					<meta property="og:title" content={title} />
@@ -294,7 +317,7 @@ export default (ctx: Context) => {
 					<meta name="twitter:title" content={title} />
 					<meta name="twitter:description" content={description} />
 					{imageUrl && <meta name="twitter:image" content={imageUrl} />}
-				</head>
+				</Head>
 				<div class="progress" aria-hidden="true" />
 				<a class="back" href="/reports">← reports</a>
 				<article>
@@ -325,7 +348,7 @@ export default (ctx: Context) => {
 
 	return (
 		<Layout scope={Styled} selected="reports">
-			<head>
+			<Head>
 				<title>{post.title} :: kyu.re</title>
 				<meta name="description" content={post.summary} />
 				<meta property="og:title" content={post.title} />
@@ -337,7 +360,7 @@ export default (ctx: Context) => {
 				<meta name="twitter:card" content={post.cover ? "summary_large_image" : "summary"} />
 				<meta name="twitter:title" content={post.title} />
 				<meta name="twitter:description" content={post.summary} />
-			</head>
+			</Head>
 			<div class="progress" aria-hidden="true" />
 			<a class="back" href="/reports">← reports</a>
 			<article>

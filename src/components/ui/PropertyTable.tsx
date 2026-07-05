@@ -1,40 +1,40 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 
 interface Props {
 	data: Record<string, [string, string | undefined]>;
 }
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: block;
 		border: 1px solid ${theme.surfaceBorder};
 		border-radius: ${radius.lg};
-		
+
 		font-family: ${fontFamily.misc};
 		letter-spacing: ${spacing.letter.misc};
 	}
-	
+
 	.kv-row {
 		display: grid;
 		grid-template-columns: minmax(80px, 140px) 1fr;
 		border-bottom: 1px solid ${theme.surfaceBorder};
 		transition: background-color ${ease.fast};
 	}
-	
+
 	.kv-row:last-child {
 		border-bottom: none;
 	}
-	
+
 	.kv-row:hover {
 		background-color: ${theme.surface};
 	}
-	
+
 	.kv-key, .kv-val {
 		display: flex;
 		align-items: center;
@@ -51,7 +51,7 @@ const Styled = css(`
 		letter-spacing: ${spacing.letter.plus};
 		border-right: 1px solid ${theme.surfaceBorder};
 	}
-	
+
 	.kv-val {
 		color: ${theme.accent};
 		font-size: ${fontSize.sm};
@@ -65,7 +65,7 @@ const Styled = css(`
 	.kv-val.link::after {
 		margin-left: 8px;
 	}
-`);
+`;
 
 export default function PropertyTable({ data }: Props) {
 	if (!data || Object.keys(data).length === 0) return null;

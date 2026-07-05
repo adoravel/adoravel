@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, spacing, theme } from "~/layout.tsx";
 import { friends } from "~/content/friends.ts";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: flex;
 		flex-wrap: wrap;
@@ -38,17 +38,14 @@ const Styled = css(`
 		);
 
 		transform: translateY(0px);
-		transition:
-			transform ${ease.spring},
-			box-shadow ${ease.spring};
+		transition: transform ${ease.spring}, box-shadow ${ease.spring};
 
-		&:hover {			
+		&:hover {
 			transform: translateY(-4px);
-			box-shadow:
-				0 12px 32px rgba(0, 0, 0, 0.45),
-				0 2px 8px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
+		}
 	}
-`);
+`;
 
 export default function ButtonWall({ buttons }: { buttons: typeof friends }) {
 	return (

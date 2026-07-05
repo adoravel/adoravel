@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2026 kylia
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
 import { Post } from "~/content/post.ts";
 
 export function flattenThread(post: Post, isRoot: boolean = true): Array<Post & { isRoot: boolean }> {

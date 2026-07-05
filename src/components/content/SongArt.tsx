@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { radius, theme } from "~/layout.tsx";
 
 const ART_PATTERN = [
@@ -43,14 +43,14 @@ const randomisePattern = (): number[][] => {
 	return grid;
 };
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		position: relative;
 		width: 64px;
 		height: 64px;
 		flex-shrink: 0;
 		background: ${theme.base};
-		border: 1px solid ${theme.baseBorder}; 
+		border: 1px solid ${theme.baseBorder};
 		border-radius: ${radius.art};
 		overflow: hidden;
 	}
@@ -70,17 +70,32 @@ const Styled = css(`
 		grid-template-rows: repeat(4, 1fr);
 	}
 
-	.art-px   { display: block; }
-	.art-px-0 { background-color: ${theme.base}; }
-	.art-px-1 { background-color: ${theme.accent}; opacity: 0.85; }
-	.art-px-2 { background-color: ${theme.onAccent}; opacity: 0.9; }
-	.art-px-3 { background-color: ${theme.textMuted}; opacity: 0.25; }
-	.art-px-4 { background-color: ${theme.surfaceBorder}; }
+	.art-px {
+		display: block;
+	}
+	.art-px-0 {
+		background-color: ${theme.base};
+	}
+	.art-px-1 {
+		background-color: ${theme.accent};
+		opacity: 0.85;
+	}
+	.art-px-2 {
+		background-color: ${theme.onAccent};
+		opacity: 0.9;
+	}
+	.art-px-3 {
+		background-color: ${theme.textMuted};
+		opacity: 0.25;
+	}
+	.art-px-4 {
+		background-color: ${theme.surfaceBorder};
+	}
 
 	.art-cover[data-loaded="true"] + .pattern {
 		display: none;
 	}
-`);
+`;
 
 export function SongArt({ url, class: className }: { class?: string; url: string | undefined }) {
 	return (

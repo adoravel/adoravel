@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, radius, spacing, theme } from "~/layout.tsx";
 import TimelinePost from "~/components/content/TimelinePost.tsx";
 import type { Post } from "~/content/post.ts";
@@ -14,7 +14,7 @@ interface Props {
 	profile: Profile;
 }
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		position: relative;
 		display: flex;
@@ -30,7 +30,7 @@ const Styled = css(`
 	}
 
 	:scope > *::before {
-		content: '';
+		content: "";
 		position: absolute;
 		left: calc(-${spacing[6]} - 10px);
 		top: ${spacing[5]};
@@ -46,7 +46,7 @@ const Styled = css(`
 	:scope > *:hover::before {
 		background: ${theme.accent};
 	}
-`);
+`;
 
 export default function Timeline({ posts, profile }: Props) {
 	if (!posts || posts.length === 0) return null;

@@ -1,16 +1,16 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import type { Post, TextSegment } from "~/content/post.ts";
 import { type Profile } from "~/services/post.ts";
 import { Bluesky } from "~/components/ui/Icon.tsx";
 import { flattenThread, formatPostDate } from "~/util/formatting.ts";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		position: relative;
 		display: flex;
@@ -21,7 +21,7 @@ const Styled = css(`
 		padding: ${spacing[4]} ${spacing[5]};
 		text-decoration: none;
 		color: inherit;
-		
+
 		transform: translateY(0px);
 		transition:
 			transform ${ease.spring},
@@ -74,7 +74,7 @@ const Styled = css(`
 		color: ${theme.textMuted};
 		border: 1px solid ${theme.baseBorder};
 		overflow: hidden;
-		
+
 		img {
 			width: 100%;
 			height: 100%;
@@ -112,7 +112,7 @@ const Styled = css(`
 	}
 
 	.body {
-    display: inline;
+		display: inline;
 		color: ${theme.subtext};
 		font-size: ${fontSize.body};
 		white-space: pre-wrap;
@@ -122,7 +122,9 @@ const Styled = css(`
 	.body a {
 		color: ${theme.accent};
 		text-decoration: none;
-		&::after { display: none !important; }
+		&::after {
+			display: none !important;
+		}
 	}
 
 	.body .tl-hashtag {
@@ -130,15 +132,15 @@ const Styled = css(`
 	}
 
 	.thread-indicator {
-	  display: inline-flex;
+		display: inline-flex;
 		align-items: center;
-    vertical-align: middle;
+		vertical-align: middle;
 		gap: ${spacing[2]};
 		margin-left: 1ch;
 		color: ${theme.accent};
 		font-size: ${fontSize.sm};
 		font-weight: 500;
-		
+
 		svg {
 			width: 12px;
 			height: 12px;
@@ -157,7 +159,7 @@ const Styled = css(`
 		font-family: ${fontFamily.misc};
 		letter-spacing: ${spacing.letter.misc};
 	}
-`);
+`;
 
 function renderSegments(segments: TextSegment[]) {
 	return segments.map((seg, i) => {
@@ -262,8 +264,7 @@ export default function TimelinePost({ post, profile }: { post: Post; profile: P
 					{hasReplies && (
 						<div class="thread-indicator">
 							<Knot />
-							{items.length - 1} more {(items.length - 1) === 1 ? "skeet" : "more skeets"}{" "}
-							in this thread
+							{items.length - 1} more {(items.length - 1) === 1 ? "skeet" : "more skeets"} in this thread
 						</div>
 					)}
 				</a>

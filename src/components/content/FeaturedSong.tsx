@@ -1,16 +1,16 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { boundaries, ease, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import { Song } from "~/content/songs.ts";
 import { SongArt } from "~/components/content/SongArt.tsx";
 
 interface Props extends Song {}
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: flex;
 		flex-direction: column;
@@ -20,7 +20,7 @@ const Styled = css(`
 		border-radius: ${radius.lg};
 		font-size: ${fontSize.sm};
 		color: ${theme.subtext};
-		
+
 		font-family: ${fontFamily.misc};
 		letter-spacing: ${spacing.letter.misc};
 
@@ -33,15 +33,13 @@ const Styled = css(`
 			border-color ${ease.fast},
 			box-shadow ${ease.spring};
 
-		&:hover {			
+		&:hover {
 			transform: translateY(-4px);
-			
+
 			background-color: ${theme.surfaceHover};
 			border-color: ${theme.surfaceBorderHover};
 
-			box-shadow:
-				0 12px 32px rgba(0, 0, 0, 0.45),
-				0 2px 8px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
 		}
 
 		&:hover .header {
@@ -87,12 +85,12 @@ const Styled = css(`
 		margin-right: 0;
 		margin-left: 8px;
 	}
-	
+
 	.listen-link:hover {
 		color: ${theme.accent};
-		
+
 		&::after {
-			background-color: ${theme.accent} !important; 
+			background-color: ${theme.accent} !important;
 		}
 	}
 
@@ -103,14 +101,14 @@ const Styled = css(`
 		gap: ${spacing[4]};
 		text-decoration: none;
 		color: inherit;
-		
+
 		@media (max-width: ${boundaries.mobileMaxWidth}) {
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
 		}
 	}
-	
+
 	.info {
 		display: flex;
 		flex-direction: column;
@@ -136,7 +134,7 @@ const Styled = css(`
 	.info-artist > spany {
 		color: ${theme.textMuted};
 	}
-`);
+`;
 
 export default function FeaturedSong({
 	title,

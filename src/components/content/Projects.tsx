@@ -1,10 +1,10 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
 import { Project, ProjectLanguage } from "~/content/projects.ts";
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { boundaries, ease, elevation, fontFamily, fontSize, radius, spacing, theme } from "~/layout.tsx";
 import { ExternalLink, License } from "~/components/ui/Icon.tsx";
 
@@ -12,7 +12,7 @@ interface Props {
 	projects: Project[];
 }
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -23,7 +23,7 @@ const Styled = css(`
 
 		font-family: ${fontFamily.misc};
 		letter-spacing: ${spacing.letter.misc};
-		
+
 		@media (max-width: ${boundaries.mobileMaxWidth}) {
 			grid-template-columns: 1fr;
 		}
@@ -42,7 +42,7 @@ const Styled = css(`
 		line-height: ${boundaries.lineHeight + 0.25};
 		text-decoration: none;
 		overflow: hidden;
-		
+
 		transform: translateY(0px);
 		box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
 		transition:
@@ -51,14 +51,12 @@ const Styled = css(`
 			background-color ${ease.fast},
 			border-color ${ease.fast};
 
-		&:hover {			
+		&:hover {
 			background-color: ${theme.surfaceHover};
 			border-color: ${theme.surfaceBorderHover};
 
 			transform: translateY(-4px);
-			box-shadow:
-				0 12px 32px rgba(0, 0, 0, 0.45),
-				0 2px 8px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
 		}
 	}
 
@@ -142,7 +140,7 @@ const Styled = css(`
 	.license > svg {
 		margin-right: 0.5ch;
 	}
-`);
+`;
 
 export default function Projects({ projects }: Props) {
 	if (!projects?.length) return;

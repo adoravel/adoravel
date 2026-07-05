@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { ease, fontFamily, fontSize, spacing, theme } from "~/layout.tsx";
 
 const repeat = (input: string, count: number, delim: string = ",") => Array(count).fill(input).join(delim);
@@ -20,7 +20,7 @@ const palette = Object.values(flags)
 	.flatMap((colors) => colors.flatMap((color) => [color, color]))
 	.join(", ");
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: flex;
 		flex-direction: column;
@@ -60,16 +60,26 @@ const Styled = css(`
 		transition: color ${ease.fast}, opacity ${ease.fast};
 	}
 
-	.connecting-arrow g { 
-		opacity: 0; 
+	.connecting-arrow g {
+		opacity: 0;
 	}
-	
-	.connecting-arrow[data-frame="1"] .f1 { opacity: 1; }
-	.connecting-arrow[data-frame="2"] .f2 { opacity: 1; }
-	.connecting-arrow[data-frame="3"] .f3 { opacity: 1; }
-	.connecting-arrow[data-frame="4"] .f4 { opacity: 1; }
-	.connecting-arrow[data-frame="5"] .f5 { opacity: 1; }
-	
+
+	.connecting-arrow[data-frame="1"] .f1 {
+		opacity: 1;
+	}
+	.connecting-arrow[data-frame="2"] .f2 {
+		opacity: 1;
+	}
+	.connecting-arrow[data-frame="3"] .f3 {
+		opacity: 1;
+	}
+	.connecting-arrow[data-frame="4"] .f4 {
+		opacity: 1;
+	}
+	.connecting-arrow[data-frame="5"] .f5 {
+		opacity: 1;
+	}
+
 	.second-name {
 		display: block;
 		width: fit-content;
@@ -77,7 +87,7 @@ const Styled = css(`
 		font-weight: 800;
 		font-size: calc(${fontSize["2xl"]} * 1.5);
 		letter-spacing: ${spacing.letter.tight};
-		
+
 		background: repeating-linear-gradient(-90deg, ${repeat(theme.text, 32)}, ${palette}, ${repeat(theme.text, 32)});
 		background-size: 1000% 100%;
 		-webkit-background-clip: text;
@@ -87,19 +97,35 @@ const Styled = css(`
 	}
 
 	@keyframes boil {
-		0%   { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-		20%  { transform: translate(1.5px, -1px) scale(0.98) rotate(1.5deg); }
-		40%  { transform: translate(-1px, 1.5px) scale(1.02) rotate(-1deg); }
-		60%  { transform: translate(1px, 1px) scale(0.97) rotate(2deg); }
-		80%  { transform: translate(-1.5px, -0.5px) scale(1.03) rotate(-2deg); }
-		100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+		0% {
+			transform: translate(0px, 0px) scale(1) rotate(0deg);
+		}
+		20% {
+			transform: translate(1.5px, -1px) scale(0.98) rotate(1.5deg);
+		}
+		40% {
+			transform: translate(-1px, 1.5px) scale(1.02) rotate(-1deg);
+		}
+		60% {
+			transform: translate(1px, 1px) scale(0.97) rotate(2deg);
+		}
+		80% {
+			transform: translate(-1.5px, -0.5px) scale(1.03) rotate(-2deg);
+		}
+		100% {
+			transform: translate(0px, 0px) scale(1) rotate(0deg);
+		}
 	}
 
 	@keyframes identity-animation {
-		0%   { background-position: 0% 50%; }
-		100% { background-position: -900% 50%; }
+		0% {
+			background-position: 0% 50%;
+		}
+		100% {
+			background-position: -900% 50%;
+		}
 	}
-`);
+`;
 
 function Pointy() {
 	return (

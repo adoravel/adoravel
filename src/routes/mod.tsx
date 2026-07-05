@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css, Head } from "@404/imouto";
 import { boundaries, fontSize, Layout, spacing, theme } from "~/layout.tsx";
 import Hero from "~/components/home/Heading.tsx";
 import Heading from "~/components/ui/Heading.tsx";
@@ -19,7 +19,7 @@ import { friends } from "~/content/friends.ts";
 import CollapsibleParagraph from "~/components/ui/CollapsibleParagraph.tsx";
 import ButtonWall from "~/components/home/ButtonWall.tsx";
 
-const Styled = css(`
+const Styled = css`
 	#heading {
 		margin-bottom: ${spacing.section};
 		position: relative;
@@ -34,11 +34,11 @@ const Styled = css(`
 		padding: 0 2ch;
 		border-left: 2px solid ${theme.lift};
 	}
-	
+
 	@media (min-width: ${boundaries.desktopMinWidth}) {
 		section, #heading {
 			position: relative;
-		
+
 			&::before {
 				position: absolute;
 				font-size: 13rem;
@@ -87,7 +87,7 @@ const Styled = css(`
 			top: 3rem;
 		}
 	}
-	
+
 	section {
 		margin-bottom: ${spacing.section};
 	}
@@ -97,49 +97,59 @@ const Styled = css(`
 		padding-left: 0;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		
+
 		margin-top: ${spacing[2]};
 		gap: ${spacing[2]};
-		
+
 		@media (max-width: ${boundaries.mobileMaxWidth}) {
-     		grid-template-columns: 1fr;
-   		}
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.highlight {
-  		color: ${theme.accent};
+		color: ${theme.accent};
 	}
 
 	.read-more-checkbox {
 		display: none;
 
-		& ~ #read-more-content { display: none !important; }
-		& ~ .read-more-label-collapse { display: none; }
+		& ~ #read-more-content {
+			display: none !important;
+		}
+		& ~ .read-more-label-collapse {
+			display: none;
+		}
 
 		&:checked {
-			& ~ #read-more-content { display: block !important; }
-			& ~ .read-more-label-expand { display: none; }
-			& ~ .read-more-label-collapse { display: inline-block; }
+			& ~ #read-more-content {
+				display: block !important;
+			}
+			& ~ .read-more-label-expand {
+				display: none;
+			}
+			& ~ .read-more-label-collapse {
+				display: inline-block;
+			}
 		}
 	}
 
-  .read-more-btn {
+	.read-more-btn {
 		margin-left: 1ch;
-    cursor: pointer;
-    text-decoration: none;
-    user-select: none;
-    font-size: ${fontSize.body};
-    color: ${theme.accent};
-  }
-`);
+		cursor: pointer;
+		text-decoration: none;
+		user-select: none;
+		font-size: ${fontSize.body};
+		color: ${theme.accent};
+	}
+`;
 
 export default () => {
 	return (
 		<Layout scope={Styled} selected="home">
-			<head>
+			<Head>
 				<title>hewo!!</title>
 				<link rel="stylesheet" href="/fonts/space-grotesk/import.css" />
-			</head>
+			</Head>
 			<header class="main" id="heading">
 				<Hero />
 			</header>

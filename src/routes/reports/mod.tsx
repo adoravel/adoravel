@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css, Head } from "@404/imouto";
 import { boundaries, ease, fontSize, Layout, radius, spacing, theme } from "~/layout.tsx";
 import Heading from "~/components/ui/Heading.tsx";
 import Footer from "~/components/layout/Footer.tsx";
@@ -14,7 +14,7 @@ import { getPosts as getBskyPosts, getProfile as getBskyProfile } from "~/servic
 import type { Context } from "@july/snarl";
 import Timeline from "~/components/content/Timeline.tsx";
 
-const Styled = css(`
+const Styled = css`
 	.header-row {
 		display: flex;
 		align-items: baseline;
@@ -55,7 +55,9 @@ const Styled = css(`
 			box-shadow ${ease.spring};
 	}
 
-	.filter-chip::after { display: none !important; }
+	.filter-chip::after {
+		display: none !important;
+	}
 
 	.filter-chip:hover {
 		color: ${theme.text};
@@ -104,13 +106,14 @@ const Styled = css(`
 		width: 100%;
 		margin: ${spacing.section} 0;
 		background-color: ${theme.baseBorder};
-		mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiI+PHBhdGggZD0iTTAgNnE2LTYgMTIgMHQxMiAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+"),
-		  linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+		mask-image:
+			url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiI+PHBhdGggZD0iTTAgNnE2LTYgMTIgMHQxMiAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+"),
+			linear-gradient(to right, transparent, black 3%, black 97%, transparent);
 		mask-composite: intersect;
 		mask-repeat: repeat-x;
 		mask-position: center;
 	}
-`);
+`;
 
 export default async (ctx: Context) => {
 	const tag = ctx.url.searchParams.get("tag");
@@ -130,9 +133,9 @@ export default async (ctx: Context) => {
 
 	return (
 		<Layout scope={Styled} selected="reports">
-			<head>
+			<Head>
 				<title>{tag ? `#${tag} — ` : ""}reports :: kyu.re</title>
-			</head>
+			</Head>
 			<div class="header-row">
 				<Heading>
 					{`${tag ? `#${tag}` : "Reports"}`}

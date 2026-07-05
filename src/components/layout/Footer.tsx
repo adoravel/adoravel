@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { Fluxer, Mail, Tangled } from "~/components/ui/Icon.tsx";
 import { ease, fontSize, spacing, theme } from "~/layout.tsx";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: block;
 		color: ${theme.textMuted};
@@ -16,7 +16,7 @@ const Styled = css(`
 
 	hr {
 		border: none;
-		border-top: 1px solid ${theme.surfaceBorder}; 
+		border-top: 1px solid ${theme.surfaceBorder};
 		margin: ${spacing.section} 0;
 	}
 
@@ -28,7 +28,7 @@ const Styled = css(`
 			background-color: ${theme.text};
 		}
 	}
-	
+
 	ul {
 		display: flex;
 		flex-wrap: wrap;
@@ -55,18 +55,15 @@ const Styled = css(`
 
 		transform: translateY(0px);
 		box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-		transition:
-			filter ${ease.fast},
-			transform ${ease.spring},
-			box-shadow ${ease.spring};
- 
+		transition: filter ${ease.fast}, transform ${ease.spring}, box-shadow ${ease.spring};
+
 		&:hover {
 			filter: brightness(0.85);
 			transform: translateY(-3px);
 			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 		}
 	}
-`);
+`;
 
 export default function Footer() {
 	return (

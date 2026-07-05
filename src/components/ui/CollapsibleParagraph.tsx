@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2025 adoravel
+ * Copyright (c) 2025-2026 kylia
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-import { css } from "~/lib/css.ts";
+import { css } from "@404/imouto";
 import { theme } from "~/layout.tsx";
 
-const Styled = css(`
+const Styled = css`
 	:scope {
 		display: inline;
 	}
@@ -14,13 +14,23 @@ const Styled = css(`
 	.read-more-checkbox {
 		display: none;
 
-		& ~ .read-more-content { display: none !important; }
-		& ~ .read-more-label-collapse { display: none; }
+		& ~ .read-more-content {
+			display: none !important;
+		}
+		& ~ .read-more-label-collapse {
+			display: none;
+		}
 
 		&:checked {
-			& ~ .read-more-content { display: block !important; }
-			& ~ .read-more-label-expand { display: none; }
-			& ~ .read-more-label-collapse { display: inline-block; }
+			& ~ .read-more-content {
+				display: block !important;
+			}
+			& ~ .read-more-label-expand {
+				display: none;
+			}
+			& ~ .read-more-label-collapse {
+				display: inline-block;
+			}
 		}
 	}
 
@@ -36,7 +46,7 @@ const Styled = css(`
 		padding: 0 2ch;
 		border-left: 2px solid ${theme.lift};
 	}
-`);
+`;
 
 export default function CollapsibleParagraph({ id, children }: { id: string; children: any }) {
 	return (
