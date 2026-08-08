@@ -1,5 +1,5 @@
 <p float="left">
-   <img align="left" width="280px" src=".webp">
+   <img align="left" width="280px" src=".github/.webp">
    <p float="left">
        <samp>
            hiya,
