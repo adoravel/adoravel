@@ -17,6 +17,7 @@ export interface ButtonWallProps {
 const Styled = css`
 	:scope {
 		position: relative;
+		justify-content: center;
 		display: flex;
 		flex-wrap: wrap;
 		gap: ${spacing[2]};
@@ -49,6 +50,7 @@ const Styled = css`
 
 	.button-label {
 		position: absolute;
+		text-align: center;
 		left: 0;
 		right: 0;
 		bottom: 0;
@@ -63,16 +65,6 @@ const Styled = css`
 	.button:hover .button-label,
 	.button:focus-within .button-label {
 		opacity: 1;
-	}
-
-	${media.mobile} {
-		:scope {
-			justify-content: center;
-		}
-
-		.button-label {
-			text-align: center;
-		}
 	}
 
 	${media.reducedMotion} {

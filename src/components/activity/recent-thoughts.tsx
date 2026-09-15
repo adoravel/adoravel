@@ -102,6 +102,10 @@ const Styled = css`
 		transition: grid-template-rows ${ease.reveal};
 	}
 
+	.thought:first-of-type .thought-details {
+		grid-template-rows: 1fr;
+	}
+
 	.thought-link:hover .thought-details,
 	.thought-link:focus-visible .thought-details {
 		grid-template-rows: 1fr;

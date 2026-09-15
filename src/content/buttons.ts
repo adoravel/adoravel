@@ -31,6 +31,12 @@ export const buttons: readonly WebButton[] = [
 		label: "the most goated sulista ever",
 	},
 	{
+		href: "https://mugman.tech",
+		src: "https://mugman.tech/88x31/me.gif",
+		alt: "mugman",
+		label: "☕🐧",
+	},
+	{
 		href: "https://paige.moe",
 		src: "https://paige.moe/88x31.gif",
 		alt: "paige",

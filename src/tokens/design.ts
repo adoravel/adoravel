@@ -160,7 +160,7 @@ export const design = createTheme({
 	boundaries: {
 		mobileMaxWidth: px(799),
 		tabletMaxWidth: px(1024),
-		maxWidth: rem(50),
+		maxWidth: rem(48),
 		contentWidth: rem(48),
 		avatarSize: rem(4.5),
 		coverSize: px(160),
