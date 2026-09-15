@@ -29,16 +29,15 @@ const Styled = css`
 	.button-link {
 		display: block;
 		line-height: 0;
-		opacity: 0.85;
-		transform: translate3d(0, 0, 0);
-		transition: opacity ${ease.fast}, transform ${ease.hover};
+		opacity: 0.8;
+		transition: opacity ${ease.reveal}, transform ${ease.fast};
 		will-change: transform;
 	}
 
 	.button-link:hover,
 	.button-link:focus-visible {
 		opacity: 1;
-		transform: translate3d(0, -1px, 0);
+		transform: scale(1.05);
 	}
 
 	.button-image {
