@@ -6,7 +6,7 @@ export const SOUND_CHANGED_EVENT = "sound-changed";
 
 export function getStoredSound(): boolean {
 	if (typeof localStorage === "undefined") return false;
-	return localStorage.getItem(SOUND_STORAGE_KEY) === "on";
+	return localStorage.getItem(SOUND_STORAGE_KEY) !== "off";
 }
 
 export function setStoredSound(enabled: boolean): void {
