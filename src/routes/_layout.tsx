@@ -246,6 +246,12 @@ const styles = css`
 		}
 	}
 
+	@media (pointer: fine) {
+		html, body {
+			scrollbar-color: ${theme.accentBorder} ${theme.base};
+		}
+	}
+
 	${revealSteps}
 `;
 
