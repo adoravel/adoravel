@@ -196,6 +196,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: ${spacing.section};
+		overflow-x: hidden;
 	}
 
 	body > main > * {
