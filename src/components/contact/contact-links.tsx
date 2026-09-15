@@ -30,7 +30,8 @@ export default function ContactLinks() {
 	return (
 		<Styled.div>
 			<p class="contact-lead">
-				Say hi, or if you're a fan of throwing money away, feel free to fund my life so I don't starve.
+				Say hi, or if you're a fan of throwing money away, feel free to fund my life so I
+				don't starve.
 			</p>
 			<ul class="contact-list">
 				<li>

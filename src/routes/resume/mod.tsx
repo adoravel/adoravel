@@ -74,6 +74,7 @@ export default function Resume() {
 				<title>{pageTitle("Résumé")}</title>
 				<meta name="description" content={`${document.name}'s résumé`} />
 			</Head>
+			{/* @ts-ignore */}
 			<SiteHeader current="resume" />
 
 			<Styled.div>

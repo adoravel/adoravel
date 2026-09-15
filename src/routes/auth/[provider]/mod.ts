@@ -16,11 +16,15 @@ export default async function BeginAuth(ctx: Context) {
 	const { provider } = ctx.params as { provider: string };
 	if (!isProvider(provider)) return new Response(null, { status: 404 });
 
-	const returnTo = safeReturnTo(ctx.query.get("return"));
-	const origin = getCanonicalOrigin(ctx.url.origin);
-	if (origin !== ctx.url.origin) {
-		return ctx.redirect(`${origin}${ctx.url.pathname}${ctx.url.search}`, 307);
+	const canonicalHost = new URL(getCanonicalOrigin(ctx.url.origin)).hostname;
+	const currentHost = new URL(ctx.url.origin).hostname;
+
+	if (canonicalHost !== currentHost) {
+		const canonicalOrigin = getCanonicalOrigin(ctx.url.origin);
+		return ctx.redirect(`${canonicalOrigin}${ctx.url.pathname}${ctx.url.search}`, 307);
 	}
+
+	const returnTo = safeReturnTo(ctx.query.get("return"));
 
 	try {
 		const url = await beginAuth(ctx, provider, {
