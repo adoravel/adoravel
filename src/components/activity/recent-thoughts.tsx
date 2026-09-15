@@ -105,6 +105,15 @@ const Styled = css`
 	.thought:first-of-type .thought-details {
 		grid-template-rows: 1fr;
 	}
+	.thought-link:hover .thought-details,
+	.thought-link:focus-visible .thought-details {
+		grid-template-rows: 1fr;
+	}
+
+	:scope:has(.thought:not(:first-of-type) .thought-link:hover) .thought:first-of-type .thought-details,
+	:scope:has(.thought:not(:first-of-type) .thought-link:focus-visible) .thought:first-of-type .thought-details {
+		grid-template-rows: 0fr;
+	}
 
 	.thought-link:hover .thought-details,
 	.thought-link:focus-visible .thought-details {
