@@ -185,6 +185,7 @@ const styles = css`
 		pointer-events: none;
 		opacity: 0.015;
 		background-image: url("data:image/svg+xml,${noise}");
+		overflow: hidden;
 	}
 
 	body > main {
