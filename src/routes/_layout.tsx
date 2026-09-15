@@ -185,8 +185,6 @@ const styles = css`
 		pointer-events: none;
 		opacity: 0.015;
 		background-image: url("data:image/svg+xml,${noise}");
-		contain: paint;
-		clip-path: inset(0);
 	}
 
 	body > main {
